@@ -10,6 +10,8 @@ module.exports.isAuth = async (req, res, next) => {
         })
     };
 
+    token = token.replace('Bearer ', '');
+
     try{
         const data = jwt.verify(token, process.env.JWT_TOKEN_SECRET);
         const user = await db.user.findOne({ where: { id: data.id } })
