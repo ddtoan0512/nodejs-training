@@ -1,23 +1,23 @@
 {
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "nodejs-training",
-    "host": "127.0.0.1",
+    "username": "nodejstraining",
+    "password": "nodejstraining",
+    "database": "nodejs_training",
+    "host": "db4free.net",
     "dialect": "mysql"
   },
   "test": {
-    "username": "root",
-    "password": null,
-    "database": "nodejs-training",
-    "host": "127.0.0.1",
+    "username": "nodejstraining",
+    "password": "nodejstraining",
+    "database": "nodejs_training",
+    "host": "db4free.net",
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "nodejs-training",
-    "host": "127.0.0.1",
+    "username": "nodejstraining",
+    "password": "nodejstraining",
+    "database": "nodejs_training",
+    "host": "db4free.net",
     "dialect": "mysql"
   }
 }
