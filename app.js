@@ -1,13 +1,25 @@
 require('dotenv').config();
-
 const express = require('express');
 const app = express();
-const port = 6969;
+const port = process.env.PORT | 6969;
 
-app.post('/', (req, res) => {
-    res.json({ username: 'Toan' })
-});
+const bodyParse = require('body-parser');
+
+// DB Sequelize
+const db = require('./models');
+
+//Routes
+const schoolRoute = require('./routes/school.route');
+const authRoute = require('./routes/auth.route');
+
+app.use(bodyParse.json());
+app.use(bodyParse.urlencoded({ extended: true }))
+
+app.use('/api', authRoute);
+
+app.use('/api/school', schoolRoute);
 
 app.listen(port, () => {
     console.log(`App listening at http://localhost:${port}`);
+    console.log(`========================================== \n \n`);
 })
