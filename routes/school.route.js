@@ -5,11 +5,13 @@ const router = express.Router();
 
 const authMiddleware = require('../middleware/auth.middleware');
 
-//Controller
+//Controllers
 const schoolController = require('../controllers/school.controller');
 
-router.get('/', authMiddleware.isAuth , schoolController.index);
+router.get('/', schoolController.index);
 
-router.post('/', authMiddleware.isAuth, schoolController.createSchool)
+router.post('/', schoolController.createSchool)
+
+router.get('/:id', schoolController.getById)
 
 module.exports = router;

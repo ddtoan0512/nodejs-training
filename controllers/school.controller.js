@@ -16,7 +16,39 @@ module.exports.createSchool = async (req, res) => {
         fullname
     };
 
-    let school = await schoolService.createSchool(schoolModel);
+    try{
+        let school = await schoolService.createSchool(schoolModel);
 
-    console.log(school);
+        return res.status(200).send({
+            status: 1,
+            message: 'Tạo trường học thành công',
+            data: school
+        })
+    }
+    catch(e){
+        return res.status(500).send({
+            status: 0,
+            message: e.message || "Lỗi khi tạo trường học"
+        })
+    }
+
 }
+
+module.exports.getById = async (req, res) => {
+    const id = req.params.id;
+    
+    try {
+        let data = await schoolService.getById(id);
+
+        return res.status(200).json({
+            status: 1,
+            school: data
+        });
+    } catch(e){
+        return res.status(500).send({
+            status: 0,
+            message: e.message || "Lỗi khi tìm kiếm trường học"
+        })
+    }
+}
+

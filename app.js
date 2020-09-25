@@ -21,5 +21,5 @@ app.use('/api/school', schoolRoute);
 
 app.listen(port, () => {
     console.log(`App listening at http://localhost:${port}`);
-    console.log(`========================================== \n \n`);
+    console.log(`==================================================== \n \n`);
 })

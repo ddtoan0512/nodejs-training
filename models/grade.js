@@ -20,6 +20,13 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'grade',
+  },{
+    define: {
+      charset: 'utf8',
+      collate: 'utf8_general_ci', 
+      timestamps: true
+    },
+    logging:false
   });
   return grade;
 };
