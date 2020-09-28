@@ -1,9 +1,25 @@
+const { query } = require('express');
+const { Sequelize } = require('../models');
 const db = require('../models');
 const School = db.school;
+
+const Op = Sequelize.Op;
 
 module.exports.index = (name) => {
     let schools = db.school.findAll();
     return schools;
+}
+
+module.exports.search = query => {
+    let data = School.findAll({
+        where: {
+            fullname: {
+                [Op.like]: `%${query}%` 
+            }
+        }
+    })
+
+    return data;
 }
 
 module.exports.createSchool = (school) => {
@@ -22,4 +38,15 @@ module.exports.getById = (id) => {
     })
 
     return data;
+}
+
+module.exports.update = (id, schoolObj) => {
+    let data = School.update(schoolObj, {
+        where: {
+            id
+        }
+    });
+
+    return data
+
 }

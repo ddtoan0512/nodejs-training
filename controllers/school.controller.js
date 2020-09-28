@@ -1,3 +1,4 @@
+const db = require('../models');
 const schoolService = require('../services/school.service');
 
 module.exports.index = async (req, res) => {
@@ -52,3 +53,64 @@ module.exports.getById = async (req, res) => {
     }
 }
 
+module.exports.delete = async (req, res) => {
+    const id = req.params.id;
+
+    try {
+        let schoolDeleted = await db.school.destroy({
+            where: {
+                id
+            }
+        })
+
+        return res.status(200).json({
+            status: 1,
+            message: "Xoá trường học thành công"
+        })
+    } catch(e){
+        return res.status(500).json({
+            status: 0,
+            message: "lỗi khi xoá trường học"
+        })
+    }
+}
+
+module.exports.update = async (req, res) => {
+    const id = req.params.id;
+
+    const schoolObj = req.body;
+
+    try {
+        let data = await schoolService.update(id, schoolObj);
+
+        return res.send({
+            status: 1,
+            message: "Cập nhật trường học thành công"
+        });
+    } catch(e){
+        return res.status(500).json({
+            status: 0,
+            message: "Lỗi khi cập nhật trường học " + e.message
+        })
+    }
+}
+
+module.exports.search = async (req, res) => {
+    let q = req.query.q;
+
+    try{
+        let schools = await schoolService.search(q);
+        
+        return res.status(200).send({
+            status: 1,
+            schools
+        })
+    } catch(e){
+        return res.status(500).json({
+            status: 0,
+            message: "Lỗi khi tìm kiếm trường học " + e.message
+        })
+    }
+
+
+}
