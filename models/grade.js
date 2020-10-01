@@ -2,6 +2,7 @@
 const {
   Model
 } = require('sequelize');
+const { Sequelize } = require('.');
 module.exports = (sequelize, DataTypes) => {
   class grade extends Model {
     /**
@@ -10,12 +11,33 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      this.schools = this.belongsToMany(models.school, {
+        through: 'school_grades',
+        as: 'schools',
+        foreignKey: 'grade_id',
+        otherKey: 'school_id'
+      })
     }
   };
   grade.init({
-    code: DataTypes.STRING,
-    fullname: DataTypes.STRING,
+    code: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: 'Mã của khối không được để trống'
+        }
+      }
+    },
+    fullname: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: 'Tên khối không được để trống'
+        }
+      }
+    },
     sort_index: DataTypes.INTEGER
   }, {
     sequelize,

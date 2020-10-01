@@ -29,7 +29,8 @@ module.exports.createSchool = async (req, res) => {
     catch(e){
         return res.status(500).send({
             status: 0,
-            message: e.message || "Lỗi khi tạo trường học"
+            message: "Lỗi khi tạo trường học",
+            errors: e.errors
         })
     }
 
@@ -111,6 +112,4 @@ module.exports.search = async (req, res) => {
             message: "Lỗi khi tìm kiếm trường học " + e.message
         })
     }
-
-
 }

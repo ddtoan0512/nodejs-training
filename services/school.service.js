@@ -6,7 +6,11 @@ const School = db.school;
 const Op = Sequelize.Op;
 
 module.exports.index = (name) => {
-    let schools = db.school.findAll();
+    let schools = db.school.findAll({ 
+        include: [{
+            model: db.grade, as: 'grades'
+        }] 
+    });
     return schools;
 }
 

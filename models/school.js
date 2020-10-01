@@ -11,11 +11,34 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      this.grades = this.belongsToMany(models.grade, 
+        { 
+          through: 'school_grades',
+          as: 'grades',
+          foreignKey: 'school_id',
+          otherKey: 'grade_id'
+        });
     }
   };
   school.init({
-    code: DataTypes.STRING,
-    fullname: DataTypes.STRING
+    code: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "Mã của trường không được để trống"
+        }
+      }
+    },
+    fullname: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "Tên của trường không được để trống"
+        }
+      }
+    }
   }, {
     sequelize,
     modelName: 'school',
