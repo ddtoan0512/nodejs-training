@@ -22,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'homeroomClass',
+    tableName: 'homeroom_classes'
   });
   return homeroomClass;
 };
